@@ -4,22 +4,32 @@ import java.util.Collection;
 
 public class CustomLinkedList<DesiredType> {
 
-    private Entry head;
+    private Entry head = null;
 
-    private Entry tail;
+    private Entry tail = null;
 
-    private int size;
+    private int size = 0;
+
+    private DesiredType[] data = (DesiredType[]) new Object()[];
+
+
 
     public int size(){
         return size;
     }
 
     public boolean isEmpty(){
+        if (size == 0){
+            return true;
+        }
+
         return false;
     }
 
     public void clear(){
+        for (int i = 0; i <= this.size; i++){
 
+        }
     }
 
     public Object[] toArray(){
@@ -35,14 +45,8 @@ public class CustomLinkedList<DesiredType> {
     }
 
     public void add(DesiredType item){
-        if (tail == null){
-            tail = new Entry(item);
-        }
-        else{
-            Entry newEntry = new Entry(item);
-            tail.next = newEntry;
-            tail = newEntry;
-        }
+        Entry newEntry = new Entry(item);
+
     }
 
     public boolean addAll(Collection<? extends DesiredType> items){
@@ -70,7 +74,6 @@ public class CustomLinkedList<DesiredType> {
     }
 
     public DesiredType get(int index){
-        Entry[index] 
         return null;
     }
 

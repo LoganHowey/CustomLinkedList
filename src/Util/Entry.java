@@ -2,7 +2,7 @@ package Util;
 
 public class Entry {
 
-    Entry next;
+    private Entry next;
 
     private Entry previous;
 
