@@ -1,18 +1,26 @@
 package Util;
 
+import java.time.temporal.TemporalAccessor;
 import java.util.Collection;
 
 public class CustomLinkedList<DesiredType> {
+    private static final class Entry {
 
-    private Entry head = null;
+        private Entry next;
 
-    private Entry tail = null;
+        private Entry previous;
 
+        private Object data;
+
+        public Entry(Object data) {
+            this.data = data;
+        }
+    }
+
+    private Entry head;
+
+    private Entry tail;
     private int size = 0;
-
-    private DesiredType[] data = (DesiredType[]) new Object()[];
-
-
 
     public int size(){
         return size;
@@ -22,18 +30,22 @@ public class CustomLinkedList<DesiredType> {
         if (size == 0){
             return true;
         }
-
         return false;
     }
 
     public void clear(){
-        for (int i = 0; i <= this.size; i++){
 
-        }
     }
 
     public Object[] toArray(){
-        return null;
+        Object[] newList = new Object[size];
+        Entry last = null;
+        for (int index = 0; index < size; index++){
+            newList[index] = head.data;
+            last = head;
+            head = head.next;
+        }
+        return newList;
     }
 
     public boolean contains(Object toFind){
@@ -44,11 +56,23 @@ public class CustomLinkedList<DesiredType> {
         return false;
     }
 
-    public void add(DesiredType item){
+    public void add(DesiredType item) {
         Entry newEntry = new Entry(item);
-
+        tail = head;
+        newEntry.next = null;
+        if (head == null) {
+            newEntry.previous = null;
+            head = newEntry;
+            size++;
+            return;
+        }
+        while (tail.next != null){
+            tail = tail.next;}
+        tail.next = newEntry;
+        newEntry.previous = tail;
+        tail = tail.next;
+        size++;
     }
-
     public boolean addAll(Collection<? extends DesiredType> items){
         return false;
     }
@@ -73,16 +97,36 @@ public class CustomLinkedList<DesiredType> {
         return null;
     }
 
-    public DesiredType get(int index){
-        return null;
+    public DesiredType get(int index) {
+        int i = 0;
+        while (i < index){
+            head = head.next;
+            i++;
+        }
+        Object newData;
+        newData = this.head.data;
+        String newer = newData.toString();
+        return (DesiredType) newer;
     }
 
     public int indexOf (Object item){
-        return 0;
+        for (int i = 0; i < size; i++){
+            if (head.data.equals(item)){
+                return i;
+            }
+            head = head.next;
+        }
+        return 999999;
     }
 
     public int lastIndexOf (Object item){
-        return 0;
+        for (int i = size - 1; i >= 0; i--){
+            if (tail.data.equals(item)){
+                return i;
+            }
+            tail = tail.previous;
+        }
+        return 999999;
     }
 
 }
